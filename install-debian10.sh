@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USERNAME=julian
-SSHPORT=45325
+SSHPORT=
 SSHDCONF=/etc/sshd/sshd_config
 
 # check if user is root
@@ -9,6 +9,8 @@ if (( $EUID != 0 )); then
     echo "Please run as root"
     exit
 fi
+
+read -p 'SSH Port: ' SSHPORT
 
 # install basic utilities
 apt update
