@@ -2,7 +2,7 @@
 
 USERNAME=julian
 SSHPORT=
-SSHDCONF=/etc/sshd/sshd_config
+SSHDCONF=/etc/ssh/sshd_config
 
 # check if user is root
 if (( $EUID != 0 )); then
