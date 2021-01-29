@@ -27,8 +27,7 @@ function yesno() {
 }
 
 function genSSHPort() {
-    RANDOM=1
-    SSHPORTDEFAULT=$[ $RANDOM % PORTRANGE + MINPORT ]
+    SSHPORTDEFAULT=$[ $RANDOM % $PORTRANGE + $MINPORT ]
 }
 
 apt update
@@ -53,6 +52,7 @@ fi
 # add repo and install webmin
 if yesno "Install webmin interface?";
 then
+    apt install -y gnupg-agent
     wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
     sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
     apt update
