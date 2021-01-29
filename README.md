@@ -9,7 +9,7 @@ This repo provides some useful scripts for setting up remote servers quickly. Al
 - Webmin (adds repo automatically): `webmin libsocket6-perl`
 - Docker (adds repo automatically): `docker-ce docker-ce-cli containerd.io`
 - docker-compose and bash autocompletion (using curl)
-- Adding a sudo user & seting their password (if docker is installed also adds the user to the `docker` group)
+- Adding a sudo user & setting their password (if docker is installed also adds the user to the `docker` group)
 - Setting the SSH server port to a random port above 49152 and disabling root access
 
 ### Commands
