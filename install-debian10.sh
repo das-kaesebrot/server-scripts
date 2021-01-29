@@ -6,9 +6,6 @@ SSHDCONF=/etc/ssh/sshd_config
 MINPORT=49152
 PORTRANGE=16382
 
-DOCKERINST=0
-DEBIAN_FRONTEND=noninteractive
-
 # check if user is root
 if (( $EUID != 0 )); then
     echo "Please run as root"
