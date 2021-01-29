@@ -18,9 +18,9 @@ fi
 function yesno() {
     while true;
     do
-        # y="y"
+        y="y"
         read -p "$1 [Y/n] " yn
-        yn=${yn:-"y"}
+        yn=${yn:-y}
         case $yn in
             [Yy]* ) return 0;;
             [Nn]* ) echo ""; return 1;;
