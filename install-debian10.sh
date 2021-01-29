@@ -17,12 +17,12 @@ fi
 function yesno() {
     while true;
     do
-        read -p "$1 [Y/n]" yn
-        name=${yn:-y}
+        read -p "$1 [Y/n] " yn
+        yn=${yn:-y}
         case $yn in
-            [Yy]* ) return true;;
-            [Nn]* ) return false;;
-            * ) echo "Invalid input. Please answer [Y/n]";;
+            [Yy]* ) return 0;;
+            [Nn]* ) return 1;;
+            * ) echo "Invalid input.";;
         esac
     done
 }
