@@ -6,7 +6,8 @@ SSHDCONF=/etc/ssh/sshd_config
 MINPORT=49152
 PORTRANGE=16382
 
-DOCKERINST=false
+DOCKERINST=0
+DEBIAN_FRONTEND=noninteractive
 
 # check if user is root
 if (( $EUID != 0 )); then
@@ -17,28 +18,31 @@ fi
 function yesno() {
     while true;
     do
+        # y="y"
         read -p "$1 [Y/n] " yn
-        yn=${yn:-y}
+        yn=${yn:-"y"}
         case $yn in
             [Yy]* ) return 0;;
-            [Nn]* ) return 1;;
-            * ) echo "Invalid input.";;
+            [Nn]* ) echo ""; return 1;;
+            # * ) echo "Invalid input.";;
         esac
     done
 }
 
 function genSSHPort() {
     RANDOM=1
-    return $[ $RANDOM % PORTRANGE + MINPORT ]
+    SSHPORTDEFAULT=$[ $RANDOM % PORTRANGE + MINPORT ]
 }
 
 apt update
+echo ""
 
 # install basic utilities
 if yesno "Install utilities [screenfetch, htop, nano]?";
 then
     apt install -y screenfetch htop nano
     echo "Installed utilities"
+    echo ""
 fi    
 
 # install lem (no PHP) stack
@@ -46,6 +50,7 @@ if yesno "Install hosting utils [mariadb-server nginx-full certbot python3-certb
 then
     apt install -y mariadb-server nginx-full certbot python3-certbot-nginx
     echo "Installed hosting utils"
+    echo ""
 fi
 
 # add repo and install webmin
@@ -55,13 +60,13 @@ then
     sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
     apt update
     apt install -y webmin libsocket6-perl
-    echo "Installed Webmin"
+    echo "Installed webmin"
+    echo ""
 fi
 
 # add repo and install docker
 if yesno "Install docker?";
 then
-    DOCKERINST=true
     apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
     curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
     apt-key fingerprint 0EBFCD88
@@ -69,6 +74,7 @@ then
     apt update
     apt install -y docker-ce docker-ce-cli containerd.io
     echo "Installed docker"
+    echo ""
 fi
 
 # install docker-compose
@@ -79,32 +85,36 @@ then
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     curl -L https://raw.githubusercontent.com/docker/compose/1.27.4/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
     echo "Installed docker-compose"
+    echo ""
 fi
 
 # add user
 if yesno "Add privileged user?";
 then
-    read -p "Username? [$USERNAMEDEFAULT]" userin
-    USERNAME=${userin:-$USERNAMEDEFAULT}
+    read -p "Username? [$USERNAMEDEFAULT] " USERNAME
+    USERNAME=${USERNAME:-$USERNAMEDEFAULT}
     useradd -m -s /bin/bash -G sudo $USERNAME
-    if [ DOCKERINST ];
-    do
-        usermod -aG docker
+    if systemctl is-active --quiet docker;
+    then
+        usermod -aG docker $USERNAME
     fi
     passwd $USERNAME
+    echo "Added privileged user $USERNAME"
+    echo ""
 fi
 
 # change ssh port
 if yesno "Change SSH server port and disable root login?";
 then
-    SSHPORTRAND=genSSHPort
-    read -p "SSH Port: [$SSHPORTRAND]" SSHPORTtmp
-    SSHPORT=${SSHPORTtmp:-$SSHPORTRAND}
+    genSSHPort
+    read -p "SSH Port: [$SSHPORTDEFAULT] " SSHPORT
+    SSHPORT=${SSHPORT:-$SSHPORTDEFAULT}
     sed -i 's/.*\bPort\b.*/Port '"$SSHPORT"'/' $SSHDCONF
     sed -i 's/.*\bPermitRootLogin.*/PermitRootLogin no/' $SSHDCONF
     systemctl restart sshd
     echo "Changed ssh port to $SSHPORT and disabled root login"
+    echo ""
 fi
 
+echo ""
 echo "Script done"
-exit 0
