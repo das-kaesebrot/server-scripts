@@ -34,12 +34,20 @@ apt update
 echo ""
 
 # install basic utilities
-if yesno "Install utilities [screenfetch, htop, nano]?";
+if yesno "Install utilities [screenfetch, htop, nano, vnstat, tuptime]?";
 then
-    apt install -y screenfetch htop nano
+    apt install -y screenfetch htop nano vnstat tuptime
     echo "Installed utilities"
     echo ""
 fi    
+
+# install security utils
+if yesno "Install security utilities? [ufw, fail2ban]?";
+then
+    apt install -y ufw fail2ban
+    echo "Installed security utilities"
+    echo ""
+fi
 
 # install lem (no PHP) stack
 if yesno "Install hosting utils [mariadb-server nginx-full certbot python3-certbot-nginx]?";
