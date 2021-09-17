@@ -1,7 +1,8 @@
 # Server scripts
 This repo provides some useful scripts for setting up remote servers quickly. All scripts run interactively.
 
-## Debian Buster
+## OS setup script
+### Debian Buster
 
 ### Included options (you will be prompted for each)
 - Utilities: `screenfetch htop nano`
@@ -15,9 +16,10 @@ This repo provides some useful scripts for setting up remote servers quickly. Al
 ### Commands
 Run as root:
 ```bash
-wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/install-debian10.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh
+wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh
 ```
 or as a privileged user:
 ```bash
-sudo sh -c "wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/install-debian10.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh"
+sudo sh -c "wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh"
+```
 ```
