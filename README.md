@@ -1,5 +1,5 @@
 # Server scripts
-This repo provides some useful scripts for setting up remote servers quickly. All scripts run interactively.
+This repo provides some useful scripts for setting up and configuring remote servers quickly.
 
 ## OS setup script
 ### Debian Buster
@@ -13,7 +13,7 @@ This repo provides some useful scripts for setting up remote servers quickly. Al
 - Adding a sudo user & setting their password (if docker is installed also adds the user to the `docker` group)
 - Setting the SSH server port to a random port above 49152 and disabling root access
 
-### Commands
+### One-liner Commands
 Run as root:
 ```bash
 wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh
