@@ -22,4 +22,12 @@ or as a privileged user:
 ```bash
 sudo sh -c "wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh"
 ```
+
+## WireGuard peer script
+This script allows you to interactively add peers to an existing WireGuard VPN configuration, appending the new peer to the server configuration and dumping a client configuration to the `peers/` subfolder in the process.
+You will be prompted for all required options.
+
+Download:
+```bash
+wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/wireguard/add-peer-interactively.sh
 ```
