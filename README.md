@@ -32,7 +32,7 @@ Download:
 wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/wireguard/add-peer-interactively.sh
 ```
 
-## Dynamic nsupdate script
+## Dynamic IP nsupdate script
 This script allows you to update multiple A records of subdomains of a given bind9 zone non-interactively and periodically (for example using a cron job) to your external IPv4 address, in case you have a dynamic one.
 It will only run an update if an IP change is detected, otherwise it will skip the update.
 
@@ -52,6 +52,13 @@ Download to current directory:
 ```bash
 wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/nsupdate/do-nsupdate.sh
 ```
+Edit the required values:
+```bash
+KEY="/path/to/your/key.conf"
+DOMAINS=("1.dyn.example.com" "2.dyn.example.com")
+ZONE="dyn.example.com"
+SERVER="ns1.example.com"
+```
 Open the cron job editor:
 ```bash
 crontab -e
@@ -62,3 +69,22 @@ Append to your cron file:
 */10 * * * * /path/to/script/do-nsupdate.sh
 ```
 Feel free to replace the amount of minutes (*/10) to your liking.
+
+## MySQL dump script
+This script will dump all databases into a file into the current directory and is supposed to be used in combination with `rsnapshot`.
+
+Download to current directory:
+```bash
+wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/mysqldump/dump-all-databases.sh
+```
+Log in as root to your database and execute the following commands:
+```sql
+CREATE USER 'backupuser'@'localhost'; -- Create local backup user without password
+GRANT SELECT, RELOAD, LOCK TABLES, SHOW VIEW ON *.* TO 'backupuser'@'localhost'; -- Grant read permissions on all databases to user
+REVOKE SELECT, RELOAD, LOCK TABLES, SHOW VIEW ON mysql.* FROM 'backupuser'@'localhost'; -- Revoke perms from mysql system tables - this is optional but recommended for security purposes
+FLUSH PRIVILEGES;
+```
+Append to `/etc/rsnapshot.conf` (make sure to tab properly):
+```bash
+backup_script   /path/to/script/dump-all-databases.sh   mysqlbackup/
+```
