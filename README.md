@@ -16,11 +16,11 @@ This repo provides some useful scripts for setting up and configuring remote ser
 ### One-liner Commands
 Run as root:
 ```bash
-wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh
+wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/main/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh
 ```
 or as a privileged user:
 ```bash
-sudo sh -c "wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh"
+sudo sh -c "wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/main/buster/install.sh -O install-tmp.sh && chmod +x install-tmp.sh && ./install-tmp.sh && rm install-tmp.sh"
 ```
 
 ## WireGuard peer script
@@ -29,7 +29,7 @@ You will be prompted for all required options.
 
 Download:
 ```bash
-wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/wireguard/add-peer-interactively.sh
+wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/main/wireguard/add-peer-interactively.sh
 ```
 
 ## Dynamic IP nsupdate script
@@ -50,7 +50,7 @@ To download and install the script as a cron job, run the following commands in 
 
 Download to current directory:
 ```bash
-wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/nsupdate/do-nsupdate.sh
+wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/main/nsupdate/do-nsupdate.sh
 ```
 Edit the required values:
 ```bash
@@ -75,7 +75,7 @@ This script will dump all databases into a file into the current directory and i
 
 Download to current directory:
 ```bash
-wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/master/mysqldump/dump-all-databases.sh
+wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/main/mysqldump/dump-all-databases.sh
 ```
 Log in as root to your database and execute the following commands:
 ```sql
