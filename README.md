@@ -24,6 +24,8 @@ sudo sh -c "wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/
 ```
 
 ## WireGuard peer script
+**THIS SCRIPT HAS BEEN MADE OBSOLETE BY [das-kaesebrot/wg-interactive](https://github.com/das-kaesebrot/wg-interactive) AND WILL NOT BE UPDATED ANYMORE**
+
 This script allows you to interactively add peers to an existing WireGuard VPN configuration, appending the new peer to the server configuration and dumping a client configuration to the `peers/` subfolder in the process.
 You will be prompted for all required options.
 
@@ -33,6 +35,8 @@ wget https://raw.githubusercontent.com/das-kaesebrot/server-scripts/main/wiregua
 ```
 
 ## Dynamic IP nsupdate script
+**THIS SCRIPT HAS BEEN MADE OBSOLETE BY [das-kaesebrot/nsupdate-dyn](https://github.com/das-kaesebrot/nsupdate-dyn) AND WILL NOT BE UPDATED ANYMORE**
+
 This script allows you to update multiple A records of subdomains of a given bind9 zone non-interactively and periodically (for example using a cron job) to your external IPv4 address, in case you have a dynamic one.
 It will only run an update if an IP change is detected, otherwise it will skip the update.
 
